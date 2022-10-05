@@ -1,3 +1,10 @@
+'''
+█░█ ▄▀█ █▀█ █░░ █▀▀ █▄█   █▀▀ █▀█ █▀█   █░█░█ █ █▄░█ █▀▄ █▀█ █░█░█ █▀
+█▀█ █▀█ █▀▄ █▄▄ ██▄ ░█░   █▀░ █▄█ █▀▄   ▀▄▀▄▀ █ █░▀█ █▄▀ █▄█ ▀▄▀▄▀ ▄█
+𝒃𝒖𝒊𝒍𝒕 𝒃𝒚 𝑨𝒚𝒖𝒔𝒉; (𝒃𝒓𝒂𝒗𝒐𝒔𝒊𝒄𝒌𝒛@𝒈𝒊𝒕𝒉𝒖𝒃)
+'''
+
+
 import pyttsx3
 import speech_recognition as sr
 import datetime
@@ -9,19 +16,31 @@ import psutil
 import pystray
 import PIL.Image
 import subprocess
-import multiprocessing
-import csv
-
-
 version = "a1.4"
 
-#MUST BE RUN IN PROGRAM FILES INSIDE THE HARLEY.DA DIRECTORY
+    #cpustats = psutil.cpu_percent()
+    #ramstats =  psutil.virtual_memory().percent
+            
 
+
+    
+        
+            
+            
+            
+        
+        
+            
+            
+            
+            
+        ))
+    
+#MUST BE RUN IN PROGRAM FILES INSIDE THE HARLEY.DA DIRECTORY
 engine = pyttsx3.init('sapi5') #microsoft api sapi5
 voices = engine.getProperty('voices')
-print(voices[1].id)
+print(voices[1].id) 
 engine.setProperty('voice', voices[1].id) #zira voice
-#test comment
 def nexrem(big,small):
     from winotify import Notification, audio
     ping = Notification(app_id="Harley: personal assistant",
@@ -32,7 +51,6 @@ def nexrem(big,small):
 
     #ping.set_audio(audio.LoopingAlarm6,loop=False)
     ping.show()
-
 def nexremlarm(big,small):
     from winotify import Notification, audio
     ping = Notification(app_id="Harley: personal assistant",
@@ -44,25 +62,21 @@ def nexremlarm(big,small):
     ping.set_audio(audio.LoopingAlarm6,loop=False)
     ping.add_actions(label="Dismiss")
     ping.show()
-
 def clearconsol():
     import subprocess
     import os
     import sys
-    import timeP
+    import time
     time.sleep(2)
     os.system("cls") #clear the console
     print("*****************************")
-
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-
 def preak(s):
     nexrem("Harley",s)
     speak(s)
     print(s)
-
 def ear():
     k = 0
     while k < 1:
@@ -73,16 +87,12 @@ def ear():
             audio = r.listen(source) #listen
         try:
             print("Recognizing...")
-            query = r.recognize_google(audio, language='en-in') #translate
+            query = r.recognize_google(audio, language='en-in') #translate stt
             print(query) #result
             return query
             break
         except Exception as e:
             continue
-
-
-
-
 def glassear(): #ear() but without print functions, good for bg listening
     k = 0
     while k < 1:
@@ -96,18 +106,14 @@ def glassear(): #ear() but without print functions, good for bg listening
             break
         except Exception as e:
             continue
-
 #NOTE: function to kill a running program through cmd input only works for .exe version
 def killself():
     os.system("taskkill /f /im "+ "harley_unopt.exe" +" /t")
-
-
-
 def woofers():
-    import pywhatkit
-    preak("Song?")
+    import pywhatkit 
+    preak("Song?") 
     comm = ear()
-    msg = "Sure, playing " + comm
+    msg = "Sure, playing " + comm 
     preak(msg)
     pywhatkit.playonyt(comm)
 def greet():
@@ -141,8 +147,6 @@ def yewt():
     yewlink = "https://www.youtube.com/results?search_query=" + y.lower()
     w.open_new_tab(yewlink)
     clearconsol()
-
-
 #user inputs
 def alarm():
     preak("Please set your alarm time: ")
@@ -164,13 +168,12 @@ def alarm():
             if alarmMinute == datetime.datetime.now().minute:
                 nexrem("Alarm","Your Alarm's ringing!")
                 break
-
 def shutdownscript():
     #write a program to shutdown or restart the system on command
     preak("Shutdown or restart?")
     command = str(ear())
     if command == "shutdown":
-
+    
         preak("Shutting down...")
         os.system("shutdown /s /t 1")
     elif command == "restart":
@@ -178,8 +181,6 @@ def shutdownscript():
         preak("Restarting...")
     else:
         preak("Invalid command")
-
-
 def reminderlist():
     preak("What do you want to do?")
     command = str(ear())
@@ -196,6 +197,8 @@ def reminderlist():
             reader = csv.reader(file)
             for row in reader:
                 preak(row)
+
+
     else:
         preak("Invalid command")
 
@@ -204,8 +207,13 @@ def reminderlist():
 #TEST FROM THIS POINT ---------------->
 
 
-greet()
 
+
+
+
+#starters
+greet()
+#------------------
 speakconst = 0
 misc1 = 0
 
@@ -213,15 +221,15 @@ while misc1 < 1:
     clearconsol()
     doccons = 0
     speakgate = glassear() #listens in the background
-
+    
     if 'harley' in speakgate.lower(): #if speech contains harley
-        while speakconst < 1:
+        while speakconst < 1: 
             nexrem("Harley","Speak now please...")
             print("Listening...")
             x = ear()
             if "google" in x.lower():
                 gewgle()
-            elif "alarm" in x.lower():
+            elif "alarm" in x.lower(): 
                 alarm()
             elif "dev mode" == x.lower():
                 nexrem("Harley","Tray released")
@@ -239,7 +247,7 @@ while misc1 < 1:
                 break #break 1st while loop
             elif "add a reminder" in x.lower():
                 reminderlist()
-
+        
             #clear the console
         continue #back to line 32
     else:
@@ -247,3 +255,10 @@ while misc1 < 1:
             nexrem("Harley",'Please call me by my name "Harley" whenever you want my help')
             doccons += 1
         continue
+    
+        
+    #process assignment
+    #multiprocessing.Process(target=function name not in strings)
+
+
+
